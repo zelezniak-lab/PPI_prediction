@@ -356,36 +356,12 @@ All data are available at: https://drive.google.com/drive/folders/1xF6MgGF5Ctfov
 		Note:  Removed pairs having sequence of length more than 1024
 </pre>
 
-### Jupyter Notebook Info(It is very confusing, so it is better to keep track of all jupyter notebooks :sweat_smile: ) 
 
-<pre>
-1. jupyter_notebooks_utils/final_data_with_embededd_vectors/train_Set_analysis.ipynb: Analysis of test and train set and also verification of independecny of train and test set 
-</pre>
 ### Models
-
-1. FC model trained on embedding vectors(element wise) 
-
-<pre>
-   Weights and model weights: <b>https://github.com/danish2562022/PPI_prediction/blob/main/models/model_on_embedding_vectors/model_01_11_2022/</b>
- </pre>
-   ![alt text](images/1st_model.png)
-   
- 2. FC model trained on embedding vectors(concatenated and mean) 
- <pre>
-   Weights and model weights: <b>https://github.com/danish2562022/PPI_prediction/blob/main/models/model_on_embedding_vectors/model_14_11_2022/</b>
- </pre>
- 
- 3. Conv model trained on embedding vectors(concatenated and mean) 
- <pre>
-   Weights and model weights: <b>https://github.com/danish2562022/PPI_prediction/blob/main/models/model_on_embedding_vectors/model_14_11_2022/</b>
- </pre>
 
 
 
 ### Task with date
-<pre>
-First Model Trained: 01/11/2022 (model_on_embedding_vectors/model_01_11_2022)
-</pre>
 
 
 
