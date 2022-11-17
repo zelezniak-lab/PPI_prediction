@@ -1,0 +1,23 @@
+{
+    "os": "Linux-5.15.0-52-generic-x86_64-with-glibc2.35",
+    "python": "3.9.12",
+    "heartbeatAt": "2022-11-13T20:48:27.764001",
+    "startedAt": "2022-11-13T20:48:26.824527",
+    "docker": null,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "gpu_count": 1,
+    "cpu_count": 16,
+    "cuda": null,
+    "args": null,
+    "state": "running",
+    "program": "<python with no main file>",
+    "git": {
+        "remote": "https://github.com/danish2562022/PPI_prediction.git",
+        "commit": "3fec7b70fc93338be062813e3825e65cd7de8818"
+    },
+    "email": "danish2562022@gmail.com",
+    "root": "/home/anwer/Desktop/PPI_prediction",
+    "host": "anwer-Lenovo-Legion-5-15ARH05H",
+    "username": "anwer",
+    "executable": "/home/anwer/anaconda3/bin/python"
+}
