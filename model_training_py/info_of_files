@@ -1,0 +1,5 @@
+1. DataLoader
+2. HyperParameter Tuning
+3. Model Training
+4. Plots
+5. Data Transformation(list of lists in a column to the dataloader input format)

@@ -260,6 +260,11 @@
 <pre>
     a. https://github.com/gdario/deep_ppi
 </pre>
+15. AutoPPI(data-leakage problem)<br/>
+<pre>
+    a. model : Joint-joint(p.concat(p')), siamese-joint, siamese-siamese
+    b. Github: https://github.com/muhaochen/seq_ppi
+</pre>
 
 All the databse: <b>http://www.ebi.ac.uk/Tools/webservices/psicquic/view/main.xhtml</b>
 	
@@ -384,13 +389,30 @@ All data are available at: https://drive.google.com/drive/folders/1xF6MgGF5Ctfov
    Results in point 2.
  </pre>
 
+### Experimental Design
+<pre>
+To Do:
 
+1. Trained on mean: Under Process
+2. Trained on class tokens: Under Process
+3. Trained on 1024*seq length input_vectors: Under Process
+4. At the end : fine tune bert for one or two epochs
+</pre>
 
 
 ### Task with date
 <pre>
 First Model Trained: 01/11/2022 (model_on_embedding_vectors/model_01_11_2022)
 Second Model Trained: 14/11/2022 (model_on_embedding_vectors/model_14_11_2022)
+
+<b> Approach 1: Concatenating Protein Sequences </b>
+	HP tuning of Model on Sum: 29/11/2022 (Report: https://wandb.ai/danish2562022/PI__prediction_fc__hyperparameter_tuning_sum_vectors/reports/Edit-Share-FC-connected-models-on-the-sum-of-embedding-vectors-Hyperparameter-Tuning---VmlldzozMDUzMDkz?accessToken=9h8t7j9smnh8hvaa7xik9n4e0od8135563n1c7zlmewlk9314zvnahr9gdic08k6)
+	HP tuning of Model on Cls: 29/11/2022 (Report: https://wandb.ai/danish2562022/PI__prediction_fc__hyperparameter_tuning_cls_vector/reports/FC-connected-models-on-CLS-Token-Hyperparameter-Tuning---VmlldzozMDUzMzA3?accessToken=fzr8ed6u7c4r55f8tx9n1hhotv99xwklwxsclxzlqpxcwdgm5o5cpwi82rqzuc3u)
+	HP tuning of Model on mean: 29/11/2022 (Report: https://wandb.ai/danish2562022/PI__prediction_fc__hyperparameter_tuning/reports/FC-connected-models-on-mean-of-embedding-vectors-Hyperparameter-Tuning---VmlldzozMDUwNDcx?accessToken=gudch9ynozjnlth0d6bpycoy5eijzqgtf1louu6mgnwjf2umqvzg201m2nkp2l92)
+	<b>Note: Approach concatenating protein sequence cannot give accuracy more than 73.35%</b>
+
+<b> Approach 2: Siamese Network on sum of Protein A's amino acids embedding and Protein B's amino acids embedding(Date:06/12/2022)  </b>
+	/model_training_py/models/Approach_2_siamese_network_on_sum.ipynb
 </pre>
 
 
