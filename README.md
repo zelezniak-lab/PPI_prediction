@@ -262,9 +262,16 @@
 </pre>
 15. AutoPPI(data-leakage problem)<br/>
 <pre>
-    a. model : Joint-joint(p.concat(p')), siamese-joint, siamese-siamese
+    a. model : Joint-joint(p.concat(p')), siamese-joint, siamese-siameseComparing two deep learning sequence-based models for protein-protein interaction prediction.
     b. Github: https://github.com/muhaochen/seq_ppi
 </pre>
+
+16. Predicting protein-protein interactions through sequence based deep learning(data-leakage problem)<br/>
+<pre>
+    a. model : Joint-joint(p.concat(p')), siamese-joint, siamese-siameseComparing two deep learning sequence-based models for protein-protein interaction prediction.
+    b. Github: https://github.com/hashemifar/DPPI
+</pre>
+
 
 All the databse: <b>http://www.ebi.ac.uk/Tools/webservices/psicquic/view/main.xhtml</b>
 	
@@ -297,7 +304,7 @@ All data are available at: https://drive.google.com/drive/folders/1xF6MgGF5Ctfov
 	human-virus ppis
 	csv_file_name: <b>lstm_phv_ppi_with_sequences.csv</b>
 	Preprocessing python script name: <b>LSTM_PHV.ipynb</b>
-	Number of positive pairs:  22383
+	Number of positive pairs:  22383Multifaceted protein–protein interaction prediction based on Siamese residual RCNN
 	Maximum length of sequences: 95
 	Number of Unique Proteins: 6878
 4. Multitask-transfer
@@ -327,7 +334,7 @@ All data are available at: https://drive.google.com/drive/folders/1xF6MgGF5Ctfov
 		Preprocessing python script name: <b>Multitask_transfer_learning_framework.ipynb</b>
 		Number of positive pairs:  8260
 		Maximum length of sequences: 1024
-		Number of Unique Proteins: 2980
+		Number of Unique Proteins: 2980Comparing two deep learning sequence-based models for protein-protein interaction prediction.
 		Note:  Removed pairs having sequence of length more than 1024
 	e. Sars-human pairs
 		csv_file_name: <b>sars_direct_interaction_virus_ppi_with_sequences.csv</b>
@@ -415,5 +422,21 @@ Second Model Trained: 14/11/2022 (model_on_embedding_vectors/model_14_11_2022)
 	/model_training_py/models/Approach_2_siamese_network_on_sum.ipynb
 </pre>
 
+### Previous model results(claimed and real accuracy on independent dataset )
 
+| Paper Title | Year of Publication | Citation | Claimed Accuracy(1:1) | Accuracy on Independent Test set(1:1)| Average Precision on Independent Test set(1:10)|
+| --- | --- |--- |--- |--- |--- |
+| AutoPPI [[1](https://www.mdpi.com/1099-4300/23/6/643)]| 2021 |  9 | 97-98% | 53-56% | 11.3-12.6% |
+| Ensemble Attention [[2](https://www.frontiersin.org/articles/10.3389/fbioe.2020.00390/full)] | 2020 |20 | 95% | 67.3% | 26.8% |
+| Ensemble DNN [[3](https://www.sciencedirect.com/science/article/pii/S0925231218306337)] | 2019 |95 | 95% | 59.5% | 17.1% |
+| Deep Learning Feature Embedding [[4](https://pubmed.ncbi.nlm.nih.gov/31245182/)] | 2019 |40 | 95% | 57.7% | 22.0% |
+| PPI-SVM [[5](https://pubmed.ncbi.nlm.nih.gov/30452960/)] | 2019 |44 | 96% | 65.3% | 22.3% |
+| PPI-LSTM [[6](https://arxiv.org/abs/1901.06268)] | 2019 |20 | 76-78% | 55.2% | 12.2% |
+| PPI-PseAAC [[7](https://pubmed.ncbi.nlm.nih.gov/30312687/)] | 2019 |89 | 83-93% | 66.0% | 23.2% |
+| PPI-Multifaceted-siamese [[8](https://academic.oup.com/bioinformatics/article/35/14/i305/5529260/)] | 2019 |126 | 89-97% | 58.5-63.2% | 13.6% |
+| LightGBM-PPI [[9](https://www.sciencedirect.com/science/article/pii/S016974391930262X)] | 2019 |118 | 89-95% | 62.7% | 19.8% |
+| PPI-CNN/LSTM [[10](https://pubmed.ncbi.nlm.nih.gov/30071670/)] | 2018 |84 | 99% | 56.7% | 13.6% |
+| PPI-Hashemifar-CNN [[11](https://academic.oup.com/bioinformatics/article/34/17/i802/5093239)] | 2018 |206 | 95% | 61.4% | 16.8% |
+| Sequence-based prediction [[12](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-017-1700-2)] | 2018 |277 | 95% | 58.8% | 14.4% |
+| DeepPPI[[12](https://pubs.acs.org/doi/10.1021/acs.jcim.7b00028)] | 2017 | 142 | 86-93% | 67.0% | 24.9% |
 
