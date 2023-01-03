@@ -2,6 +2,7 @@ import os
 import sys
 import random
 import copy
+import PPIPUtils
 
 ### Some code snippet taken from benchmark_eval_paper
 
@@ -95,8 +96,80 @@ def drawPairs(pairLst,numPairs,skipLst = []):
     random.shuffle(pairLst)
     return pairLst[0:numPairs]
 
-
+def writePosNegData(fname,pos,neg,randomOrder=True):
+	lst = []
+	for item in pos:
+		lst.append((item[0],item[1],1))
+	for item in neg:
+		lst.append((item[0],item[1],0))
+	if randomOrder:
+		random.shuffle(lst)
+	else:
+		lst.sort()
+	PPIPUtils.writeTSV2DLst(fname,lst)
     
 
+#generate numPos and numNeg positive and negative pairs randomly, create k folds of data, (optionally) create a folder=foldername, and save the folds to files in the folder
+#folderName should end in '/' or '\\'
+#intLst and protLst are known interactions (tuple pairs, where for each pair (X,Y), X < Y), and protLst is the list of all proteins
+def createRandomKFoldData(intLst, protLst,numPos,numNeg,k,folderName):
+	PPIPUtils.makeDir(folderName)
+	pos = drawPairs(intLst,numPos)
+	neg = genRandomPairs(protLst,numNeg,intLst)
+	trainSets, testSets = PPIPUtils.createKFolds(pos,neg,k,seed=None)
+	for i in range(0,k):
+		PPIPUtils.writeTSV2DLst(folderName+'Train_'+str(i)+'.tsv',trainSets[i])
+		PPIPUtils.writeTSV2DLst(folderName+'Test_'+str(i)+'.tsv',testSets[i])
+
+#Primary function for creating non-heldout train and test data
+#generats random splits of non-overlapping train and test data, and writes the groups to a file in the given folder
+#function generates 1 folder, X train set, and X*N test sets where n is the length of the 2nd argument of tuple pairs
+#intLst and protLst are known interactions (tuple pairs, where for each pair (X,Y), X < Y), and protLst is the list of all proteins
+#ratioslst a tuple contiaing the following information in the format (A,B,F),[(C1,D1,F1)...]):
+#lst tuple arg1, tuple (A,B,F)
+#A -- number of positive pairs in training data, integer
+#B -- number of negative pairs in training data, integer
+#F -- file prefix for training data
+#lst tuple arg2, lst of tuples [(C1,D1,E1),(C2,D2,E2),(C3,D3,E3). . .]
+#C1,2,3... number of positive pairs in test data set (1,2,3...)
+#D1,2,3... number of negative pairs in test data set (1,2,3...)
+#E1,2,3... file prefix for test data set (1,2,3...)
+#numSets is the number of times to iterate the ratiosLst (generating numSets train, and numSets *len(arg2) test sets)
+#folderName is the name of the folder to save the data to
 
 
+def createRandomData(intLst, protLst, ratiosLst,numSets,folderName):
+	PPIPUtils.makeDir(folderName)
+	for k in range(0,numSets):
+		#generate train data
+		trainPosPairs = ratiosLst[0][0]
+		trainNegPairs = ratiosLst[0][1]
+		trainFNamePrefix = ratiosLst[0][2]
+		trainPos = drawPairs(intLst,trainPosPairs)
+		trainNeg = genRandomPairs(protLst,trainNegPairs,intLst)
+		writePosNegData(folderName+trainFNamePrefix+str(k)+'.tsv',trainPos, trainNeg)
+		
+		#generate the test data:
+		for item in ratiosLst[1]:
+			testPosPairs = item[0]
+			testNegPairs = item[1]
+			testFNamePrefix = item[2]
+			testPos = drawPairs(intLst,testPosPairs,trainPos)
+			testNeg = genRandomPairs(protLst,testNegPairs,intLst+trainNeg)
+			writePosNegData(folderName+testFNamePrefix+str(k)+'.tsv',testPos, testNeg)
+			
+
+
+
+#Primary function for spliting proteins in groups
+#splits proteins into numGroups groups, and creates a grid of which interactions fall into which groups
+#continues randomly generating groups until the minimum size requirements are met
+#minSizeSmall is the minimum size for group pairs where i=j, such as Group (0,0)
+#minSizeLarge is the minimum size for group pairs where i!=j, such as Group (0,1)
+#if you set the minimum sizes too large for the given number of groups, this functon will fail and return None, None, None
+#since this will generate numGroups small groups, and (numGroups*numGroups-numGroups)/2 large groups,
+#we recommend not setting minsizeSmall >= len(intLst)/((numGroups*numGroups-numGroups)/2+numGroups/2)/2 * .97, and not setting minSizeLarge more than twice that
+#For example, given 120,000 interactions, and 6 groups, points will be split into 15 large groups and 6 small/half-size groups
+#Given 120,000 interactions, and that 120,000/18/2*.97  = 3233.  Keeping the numbers below 3233 (small) and 6466 (large) is recommended, but lower numbers could be needed to converge
+
+#returns list of list of proteins per group, dictionary mapping proteins to groups, and list of list of group pairs with sets of interactions
