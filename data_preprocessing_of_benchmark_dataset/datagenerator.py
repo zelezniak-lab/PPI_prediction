@@ -173,3 +173,28 @@ def createRandomData(intLst, protLst, ratiosLst,numSets,folderName):
 #Given 120,000 interactions, and that 120,000/18/2*.97  = 3233.  Keeping the numbers below 3233 (small) and 6466 (large) is recommended, but lower numbers could be needed to converge
 
 #returns list of list of proteins per group, dictionary mapping proteins to groups, and list of list of group pairs with sets of interactions
+
+
+
+def createGroupData(intLst,protLst,numGroups,minSizeSmall,minSizeLarge,maxAttempts=1000):
+	groups = []
+	groupDict = {}
+	groupInts = []
+	for attempt in range(0,maxAttempts):
+		#create groups, returning list of groups, and dictionary mapping proteins to groups
+		groups, groupDict = createProteinGroups(protLst,numGroups)
+		smallest1 = minSizeSmall
+		smallest2 = minSizeLarge
+		#split all interaction pairs into group pairs, returning list of list of groups
+		groupInts = assignPairsToGroups(intLst,groups,groupDict)
+		for i in range(0,len(groupInts)):
+			for j in range(i,len(groupInts[i])):
+				if i == j:
+					smallest1 = min(smallest1,len(groupInts[i][j]))
+				else:
+					smallest2 = min(smallest2,len(groupInts[i][j]))	
+		#ensure smallest groups meet size requirements
+		if smallest1 >= minSizeSmall and smallest2 >=minSizeLarge:
+			return groups, groupDict, groupInts
+	else:
+		return None, None, None
