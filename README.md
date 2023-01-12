@@ -399,7 +399,8 @@ All data are available at: https://drive.google.com/drive/folders/1xF6MgGF5Ctfov
   
  4. Siamese Network 
   <pre>
-
+	code for training: PPI_prediction/models/model_on_embedding_vectors/model_30_11_2022/Approach_2_concat_siamese_network_on_sum_.ipynb
+	weights: PPI_prediction/models/model_on_embedding_vectors/model_30_11_2022/best_model_trained_fc_v2.pth
   </pre>
   ![alt text](images/result_16_12_2023.png)
 
